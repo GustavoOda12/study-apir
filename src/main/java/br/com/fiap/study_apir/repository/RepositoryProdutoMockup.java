@@ -25,4 +25,8 @@ public class RepositoryProdutoMockup {
         .findFirst();
     }
 
+    public boolean deleteById(Long id) {
+        return true;
+    }
+
 }
