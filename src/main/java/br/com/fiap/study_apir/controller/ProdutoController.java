@@ -29,9 +29,9 @@ public class ProdutoController {
 
     @GetMapping("/{id}")    
     public ResponseEntity<Produto> findById(@PathVariable Long id) {        
-        Optional<Produto> optProduto = mockup.findById(id);
-        
-        return optProduto.map(p -> ResponseEntity.ok(p))
+        return mockup 
+            .findById(id)
+            .map(ResponseEntity::ok)
             .orElse(ResponseEntity.notFound().build());
     }
 
@@ -50,5 +50,4 @@ public class ProdutoController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Produto excluído");
 
     }
-
 }

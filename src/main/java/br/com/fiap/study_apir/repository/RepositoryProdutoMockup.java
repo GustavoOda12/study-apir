@@ -1,5 +1,6 @@
 package br.com.fiap.study_apir.repository;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -10,11 +11,8 @@ public class RepositoryProdutoMockup {
     private List<Produto> produtos = new ArrayList<>();
 
     public RepositoryProdutoMockup() {
-        Produto produto = new Produto();
-        produto.setId(1L);
-        produto.setNome("Maçã");
-
-        produtos.add(produto);
+        produtos.add(new Produto(1L, "Maça", BigDecimal.valueOf(10,50)));
+        produtos.add(new Produto(5L, "Uva", BigDecimal.valueOf(10,50)));
     }
 
     public List<Produto> findAll() {
