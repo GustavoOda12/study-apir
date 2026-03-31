@@ -45,9 +45,9 @@ public class ProdutoController {
         return ResponseEntity.status(HttpStatus.OK).body("Produto atualizado");
     }
 
-    @DeleteMapping
-    public ResponseEntity<String> delete(Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(Long id) {
         mockup.deleteById(id);        
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Produto excluído");
+        return ResponseEntity.noContent().build();
     }
 }
