@@ -9,10 +9,11 @@ import br.com.fiap.study_apir.model.Produto;
 
 public class RepositoryProdutoMockup {
     private List<Produto> produtos = new ArrayList<>();
+    private long ID = 0L;
 
     public RepositoryProdutoMockup() {
-        produtos.add(new Produto(1L, "Maça", BigDecimal.valueOf(10,50)));
-        produtos.add(new Produto(5L, "Uva", BigDecimal.valueOf(10,50)));
+        produtos.add(new Produto(ID++, "Maça", BigDecimal.valueOf(10,50)));
+        produtos.add(new Produto(ID++, "Uva", BigDecimal.valueOf(10,50)));
     }
 
     public List<Produto> findAll() {
@@ -26,7 +27,28 @@ public class RepositoryProdutoMockup {
     }
 
     public boolean deleteById(Long id) {
-        return true;
+        return produtos.removeIf(p -> p.getId().equals(id));
+    }
+
+    public Produto create (Produto produto) {
+        //atribuir o id novo ao produto a ser cadastrado
+        produto.setId(ID++);
+        //salvar no BD
+        produtos.add(produto);
+        //retornar o produto novo        
+        return produto;
+    }
+
+    public boolean update(Long id, Produto produto) {
+        Optional<Produto> optProduto = this.findById(id);
+        if(optProduto.isPresent()) {
+            Produto produtoAtual = optProduto.get();
+            produtoAtual.setNome(produto.getNome());
+            produtoAtual.setValor(produto.getValor());
+
+            return true;
+        }
+        return false;
     }
 
 }

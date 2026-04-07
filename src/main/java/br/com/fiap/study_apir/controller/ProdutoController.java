@@ -1,7 +1,6 @@
 package br.com.fiap.study_apir.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,11 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.study_apir.model.Produto;
 import br.com.fiap.study_apir.repository.RepositoryProdutoMockup;
+
 
 @RestController
 @RequestMapping("api/${api.version}/produtos")
@@ -23,8 +24,8 @@ public class ProdutoController {
     private RepositoryProdutoMockup mockup = new RepositoryProdutoMockup();
 
     @PostMapping
-    public ResponseEntity<String> create() {
-        return ResponseEntity.status(HttpStatus.CREATED).body("Produto criado");
+    public ResponseEntity<Produto> create(@RequestBody Produto produto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(mockup.create(produto));
     }
 
     @GetMapping("/{id}")    
